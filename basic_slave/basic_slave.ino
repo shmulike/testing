@@ -26,8 +26,8 @@ void loop()
 void requestEvent(void)
 {
   Serial.println("Send !");
-  digitalWrite(LED_BUILTIN, HIGH); delay(200);
-  digitalWrite(LED_BUILTIN, LOW);
+  //digitalWrite(LED_BUILTIN, HIGH); delay(200);
+  //digitalWrite(LED_BUILTIN, LOW);
   
   value += 0.01;
 
