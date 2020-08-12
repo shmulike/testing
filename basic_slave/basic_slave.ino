@@ -35,5 +35,5 @@ void loop() {
 //=====[ FUNCTIONS ]=================================================================
 
 void requestEvent(){      
-   Wire.Write(u.fval, 4);
+   Wire.Write(u.b, 4);
 }
