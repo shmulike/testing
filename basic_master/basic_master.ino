@@ -1,5 +1,7 @@
+//=====[ INCULDE ]==============================================================
 #include <i2c_t3.h>
 
+//=====[ VARIABLES ]============================================================
 uint8_t slave_1 = 0x64;
 union u_tag {
   byte b[4];
@@ -8,6 +10,7 @@ union u_tag {
 byte data[4] = {0};
 int count;
 
+//=====[ SETUP ]================================================================
 void setup()
 {
     // Setup for Master mode, pins 18/19, external pullups, 400kHz, 200ms default timeout
@@ -17,19 +20,20 @@ void setup()
     while(!Serial);
 }
 
-void loop()
-{
-  Serial.print("Reading from Slave: ");
-  Wire.requestFrom(slave_1, (size_t)data); // Read from Slave (string len unknown, request full buffer)
+//=====[ LOOP ]=================================================================
+void loop(){
+  Serial.print("Reading from Slave; ");
+  Wire.requestFrom(slave_1, sizeof(data)); // Read from Slave (string len unknown, request full buffer)
   if(Wire.getError()){
     Serial.print("FAIL code: ");
     Serial.println(Wire.getError());
     }
-    else{
-      Wire.read(data, Wire.available());
-      for (int i = 0; i < 4; i++)
-        u.b[i] = data[i];
-      Serial.println(u.fval,3);
-      }
-  delay(100);                       // Delay to space out tests
-}
+  else{
+    Serial.print("Encoder value: ");
+    Wire.read(data, Wire.available());
+    for (int i = 0; i < 4; i++)
+      u.b[i] = data[i];
+    Serial.println(u.fval,3);
+    }
+  delay(100);                       // Delay to space out tests 
+  }
